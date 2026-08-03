@@ -8,10 +8,10 @@ import repository.ProductRepository;
 
 public class ProductService {
 
-    private ProductRepository repository;
+    private ProductRepositoryImpl repository;
 
     public ProductService(ProductRepository repository) {
-        this.repository = repository;
+        this.repository = (ProductRepositoryImpl) repository;
     }
 
     public void addProduct(Product product) {

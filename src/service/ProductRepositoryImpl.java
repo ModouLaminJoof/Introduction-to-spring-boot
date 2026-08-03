@@ -1,6 +1,7 @@
-package repository;
+package service;
 import model.Category;
 import model.Product;
+import repository.ProductRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;

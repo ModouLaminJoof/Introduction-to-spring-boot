@@ -1,12 +1,11 @@
 import model.Category;
 import model.Product;
 import repository.ProductRepository;
-import repository.ProductRepositoryImpl;
+import service.ProductRepositoryImpl;
 import service.ProductService;
 
 import java.util.Comparator;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 import java.math.BigDecimal;
 
 public class Main {
