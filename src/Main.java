@@ -2,6 +2,7 @@ import model.Category;
 import model.Product;
 import repository.ProductRepository;
 import repository.ProductRepositoryImpl;
+import service.ProductService;
 
 import java.util.Comparator;
 import java.util.Scanner;
@@ -13,6 +14,8 @@ public class Main {
         Scanner input = new Scanner(System.in);
 
         ProductRepository repo = new ProductRepositoryImpl();
+        ProductService service = new ProductService(repo);
+        
 
             while(true){
                 System.out.println("\n1. Add Product");
@@ -46,18 +49,18 @@ public class Main {
 
                         Category category = Category.values()[input.nextInt()];
 
-                        repo.add(new Product(id, name, description, price, quantity, category));
+                        service.addProduct(new Product(id, name, description, price, quantity, category));
                         System.out.println("Saved");
-                        System.out.println(repo.findAll().size());
+                        System.out.println(service.findAll().size());
                         break;
                     case 2:
-                        repo.findAll().stream()
+                        service.findAll().stream()
                                 .sorted(Comparator.comparing(Product::getName))
                                 .forEach(System.out::println);
                         break;
                     case 3:
                         System.out.println("Product Id: ");
-                        Product p = repo.findById(input.nextInt());
+                        Product p = service.findById(input.nextInt());
 
                         if (p != null) {
                             input.nextLine();
@@ -68,7 +71,7 @@ public class Main {
                         break;
                     case 4:
                         System.out.println("Product Id: ");
-                        repo.delete(input.nextInt());
+                        service.delete(input.nextInt());
                         System.out.println("Product deleted successfully");
                         break;
                     case 5:
@@ -80,10 +83,10 @@ public class Main {
 
                         Category c = Category.values()[input.nextInt()];
 
-                        repo.findByCategory(c).forEach(System.out::println);
+                        service.findByCategory(c).forEach(System.out::println);
                         break;
                     case 6:
-                        repo.findAll().stream()
+                        service.findAll().stream()
                                 .filter(x -> x.getStockQuantity() > 0)
                                 .toList()
                                 .forEach(System.out::println);
